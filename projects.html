@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects Showcase | Suhas M</title>
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="neo-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400;700&family=Caveat:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            background: var(--bg, #d0d0d0);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .showcase-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .showcase-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            display: inline-block;
+            position: relative;
+            background: var(--pink);
+            padding: 0.5rem 2rem;
+            border: var(--border-width) solid var(--border);
+            border-radius: 8px;
+            box-shadow: 6px 6px 0 var(--border);
+            margin-bottom: 2rem;
+            color: var(--text);
+            transform: rotate(-1deg);
+        }
+
+        .showcase-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 1rem;
+            border: var(--border-width) solid var(--border);
+            box-shadow: 4px 4px 0 var(--border);
+            border-radius: 8px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 3rem;
+            padding: 2rem 4rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--white);
+            border: var(--border-width) solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 8px 8px 0 var(--border);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .project-card:nth-child(even) {
+            transform: translateY(15px);
+        }
+
+        .project-card:hover {
+            transform: translate(-4px, -4px) !important;
+            box-shadow: 12px 12px 0 var(--border);
+            z-index: 2;
+        }
+
+        .project-image-wrapper {
+            width: 100%;
+            height: 220px;
+            border-bottom: var(--border-width) solid var(--border);
+            background: var(--cyan);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            background: var(--white);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text);
+        }
+
+        .project-desc {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            color: var(--text);
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-showcase {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: var(--border-width) solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            transition: all 0.2s;
+            font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            cursor: pointer;
+        }
+
+        .btn-showcase:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--border);
+        }
+
+        .btn-live {
+            background: var(--accent);
+            box-shadow: 4px 4px 0 var(--border);
+        }
+
+        .btn-repo {
+            background: var(--yellow);
+            box-shadow: 4px 4px 0 var(--border);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--secondary);
+            border: 2px solid var(--border);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            box-shadow: 2px 2px 0 var(--border);
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .project-card:nth-child(even) {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+    <div class="page-wrapper">
+        <header class="showcase-header">
+            <h1 class="showcase-title">Projects Showcase</h1>
+            <p class="showcase-subtitle">A collection of demo projects. Explore the code and live demos below!</p>
+        </header>
+
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/66d9ef/000000?text=Project+1" alt="Project 1">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 1</h3>
+                    <p class="project-desc">This is a demo description for project 1. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/ffd93d/000000?text=Project+2" alt="Project 2">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 2</h3>
+                    <p class="project-desc">This is a demo description for project 2. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/ff6b9d/000000?text=Project+3" alt="Project 3">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 3</h3>
+                    <p class="project-desc">This is a demo description for project 3. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/a8e6cf/000000?text=Project+4" alt="Project 4">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 4</h3>
+                    <p class="project-desc">This is a demo description for project 4. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/66d9ef/000000?text=Project+5" alt="Project 5">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 5</h3>
+                    <p class="project-desc">This is a demo description for project 5. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/ffd93d/000000?text=Project+6" alt="Project 6">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 6</h3>
+                    <p class="project-desc">This is a demo description for project 6. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 7 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/ff6b9d/000000?text=Project+7" alt="Project 7">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 7</h3>
+                    <p class="project-desc">This is a demo description for project 7. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 8 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/a8e6cf/000000?text=Project+8" alt="Project 8">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 8</h3>
+                    <p class="project-desc">This is a demo description for project 8. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 9 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/66d9ef/000000?text=Project+9" alt="Project 9">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 9</h3>
+                    <p class="project-desc">This is a demo description for project 9. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 10 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/ffd93d/000000?text=Project+10" alt="Project 10">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 10</h3>
+                    <p class="project-desc">This is a demo description for project 10. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 11 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/ff6b9d/000000?text=Project+11" alt="Project 11">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 11</h3>
+                    <p class="project-desc">This is a demo description for project 11. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 12 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/a8e6cf/000000?text=Project+12" alt="Project 12">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 12</h3>
+                    <p class="project-desc">This is a demo description for project 12. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 13 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/66d9ef/000000?text=Project+13" alt="Project 13">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 13</h3>
+                    <p class="project-desc">This is a demo description for project 13. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 14 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/ffd93d/000000?text=Project+14" alt="Project 14">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 14</h3>
+                    <p class="project-desc">This is a demo description for project 14. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 15 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/ff6b9d/000000?text=Project+15" alt="Project 15">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 15</h3>
+                    <p class="project-desc">This is a demo description for project 15. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 16 -->
+            <div class="project-card">
+                <div class="project-badge">Demo</div>
+                <div class="project-image-wrapper">
+                    <img src="https://placehold.co/600x400/a8e6cf/000000?text=Project+16" alt="Project 16">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Title 16</h3>
+                    <p class="project-desc">This is a demo description for project 16. Replace this text with actual
+                        details about the tech stack, features, and challenges solved during development.</p>
+                    <div class="project-buttons">
+                        <button type="button" class="btn-showcase btn-live"><i class="fas fa-external-link-alt"></i>
+                            Live</button>
+                        <button type="button" class="btn-showcase btn-repo"><i class="fab fa-github"></i> Repo</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
